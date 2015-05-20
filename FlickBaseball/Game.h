@@ -1,8 +1,9 @@
 #pragma once
 #include <vector>
-#include <map>
+#include <iostream>
 #include "SFML\Graphics.hpp"
 #include "Button.h"
+#include "GameStateManager.h"
 
 namespace fbb {
 
@@ -12,9 +13,6 @@ public:
 	~Game();
 	void gameLoop();
 
-	sf::Font getFont() const { return this->font; }
-	//TODO: Create gamestate manager and integrate buttons to the states
-
 private:
 	const float WIDTH = 1280.0f;
 	const float HEIGHT = 720.0f;
@@ -22,9 +20,8 @@ private:
 
 	sf::RenderWindow window;
 	sf::View camera;
-	sf::Font font;
-	std::map<std::string, std::vector<sf::Drawable*>> resources;
-	std::vector<fbb::Button> mainMenuButtons;
+	sf::VertexArray background;
+	fbb::GameStateManager gsm;
 	std::vector<fbb::Button>* currentButtonSet;
 };
 
