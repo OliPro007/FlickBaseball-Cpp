@@ -1,9 +1,11 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include <functional>
 #include "SFML\Graphics.hpp"
 #include "Button.h"
 #include "GameStateManager.h"
+#include "Event.h"
 
 namespace fbb {
 
@@ -13,14 +15,15 @@ public:
 	~Game();
 	void gameLoop();
 
+	static const float WIDTH;
+	static const float HEIGHT;
+
 private:
-	const float WIDTH = 1280.0f;
-	const float HEIGHT = 720.0f;
+	
 	const sf::String TITLE = "Flick Baseball";
 
 	sf::RenderWindow window;
 	sf::View camera;
-	sf::VertexArray background;
 	fbb::GameStateManager gsm;
 	std::vector<fbb::Button>* currentButtonSet;
 };

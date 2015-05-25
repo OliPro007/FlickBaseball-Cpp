@@ -1,19 +1,19 @@
-#include "MenuState.h"
+#include "NormalModeState.h"
 
 namespace fbb {
 
-MenuState::MenuState() {
-	std::cout << "Created Menu state!" << std::endl;
+NormalModeState::NormalModeState() {
+	std::cout << "Created Normal Mode state!" << std::endl;
 }
 
-MenuState::~MenuState() {
+NormalModeState::~NormalModeState() {
 	fbb::IGameState::~IGameState();
 }
 
-void MenuState::init() {
+void NormalModeState::init() {
 	sf::Clock* clock = new sf::Clock();
 	sf::Time beginTime = clock->getElapsedTime();
-	std::cout << "Initializing Menu state..." << std::endl;
+	std::cout << "Initializing Normal Mode state..." << std::endl;
 
 	font.loadFromFile("opensansc.ttf");
 
@@ -44,17 +44,15 @@ void MenuState::init() {
 	quad[1].texCoords = sf::Vector2f(textureX, 0.0f);
 	quad[2].texCoords = sf::Vector2f(textureX, textureY);
 	quad[3].texCoords = sf::Vector2f(0.0f, textureY);
-	text.setString("Normal Mode");
+	text.setString("Return");
 	textRect = text.getLocalBounds();
 	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
 	text.setPosition(pos + textureX / 2, pos + textureY / 2);
-	fbb::Button btnNormalMode(text, quad, textureUnselected, textureSelected, textureClicked);
-	btnNormalMode.setAction([this]() {
-		std::cout << "Switching to Normal Mode..." << std::endl;
+	fbb::Button btnReturn(text, quad, textureUnselected, textureSelected, textureClicked);
+	btnReturn.setAction([this]() {
+		std::cout << "Returning to Menu..." << std::endl;
 		fbb::Event e;
-		e.type = fbb::Event::ChangeState;
-		e.changeState.thisState = MENU_STATE;
-		e.changeState.nextState = NORMALGAME_STATE;
+		e.type = fbb::Event::Return;
 		pushEvent(e);
 	});
 
@@ -79,18 +77,18 @@ void MenuState::init() {
 		pushEvent(e);
 	});
 
-	buttonList.push_back(btnNormalMode);
+	buttonList.push_back(btnReturn);
 	buttonList.push_back(btnQuit);
 
-	std::cout << "Done initializing Menu state! Time: " << (clock->getElapsedTime() - beginTime).asMilliseconds() << " milliseconds" << std::endl;
+	std::cout << "Done initializing Normal Mode state! Time: " << (clock->getElapsedTime() - beginTime).asMilliseconds() << " milliseconds" << std::endl;
 	delete clock;
 }
 
-void MenuState::draw() {
+void NormalModeState::draw() {
 
 }
 
-void MenuState::update() {
+void NormalModeState::update() {
 
 }
 

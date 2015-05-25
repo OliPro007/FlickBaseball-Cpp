@@ -75,13 +75,16 @@
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="NormalModeState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Event.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="IGameState.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="NormalModeState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="button_clicked.png" />

@@ -2,20 +2,31 @@
 
 namespace fbb {
 
-GameStateManager::GameStateManager() : gameStates(), previousStates() {
+GameStateManager::GameStateManager() {
 	std::cout << "Initializing game state manager..." << std::endl;
 	gameStates.push_back(new MenuState());
+	gameStates.push_back(new NormalModeState);
 	gameStates.shrink_to_fit();
 
-	setState(MENU_STATE);
+	setState(IGameState::MENU_STATE);
 	std::cout << "Done initializing game state manager!" << std::endl;
 }
 
 GameStateManager::~GameStateManager() {}
 
-void GameStateManager::setState(int state) {
+void GameStateManager::setState(const unsigned int state) {
 	currentState = state;
 	gameStates.at(currentState)->init();
+}
+
+int GameStateManager::getPreviousState() {
+	int i = previousStates.top();
+	previousStates.pop();
+	return i;
+}
+
+void GameStateManager::setPreviousState(const unsigned int state) {
+	previousStates.push(state);
 }
 
 } //End namespace

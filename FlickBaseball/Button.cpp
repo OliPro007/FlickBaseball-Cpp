@@ -12,6 +12,7 @@ Button::Button(const Button& other) {
 	this->selectedImg = other.selectedImg;
 	this->clickedImg = other.clickedImg;
 	this->currentImg = &unselectedImg;
+	this->action = other.action;
 }
 
 ///////////////////////////////////////
@@ -47,6 +48,10 @@ void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	states.texture = currentImg;
 	target.draw(vertices, states);
 	target.draw(text, states);
+}
+
+void Button::onClick() const {
+	this->action();
 }
 
 } //End namespace

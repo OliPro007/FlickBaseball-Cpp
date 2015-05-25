@@ -5,10 +5,10 @@
 
 namespace fbb {
 
-class MenuState : public fbb::IGameState {
+class NormalModeState : public fbb::IGameState {
 public:
-	MenuState();
-	~MenuState();
+	NormalModeState();
+	~NormalModeState();
 
 	virtual void init() override;
 	virtual void draw() override;
