@@ -13,6 +13,9 @@ public:
 	GameStateManager();
 	~GameStateManager();
 
+	void draw(sf::RenderTarget& window);
+	void update();
+
 	std::vector<fbb::Button>* getButtons() { return gameStates.at(currentState)->getButtons(); }
 	void setState(const unsigned int state);
 	void setPreviousState(const unsigned int state);

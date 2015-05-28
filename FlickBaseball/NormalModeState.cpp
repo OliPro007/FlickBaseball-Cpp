@@ -84,7 +84,7 @@ void NormalModeState::init() {
 	delete clock;
 }
 
-void NormalModeState::draw() {
+void NormalModeState::draw(sf::RenderTarget& window) {
 
 }
 

@@ -83,6 +83,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="IGameState.h" />
+    <ClInclude Include="Main.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="NormalModeState.h" />
   </ItemGroup>
@@ -90,6 +91,9 @@
     <Image Include="button_clicked.png" />
     <Image Include="button_selected.png" />
     <Image Include="button_unselected.png" />
+    <Image Include="loading.png" />
+    <Image Include="mainmenu.png" />
+    <Image Include="title.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="opensansc.ttf" />

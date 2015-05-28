@@ -3,6 +3,7 @@
 #include <iostream>
 #include <functional>
 #include "SFML\Graphics.hpp"
+#include "Main.h"
 #include "Button.h"
 #include "GameStateManager.h"
 #include "Event.h"
@@ -14,9 +15,6 @@ public:
 	Game();
 	~Game();
 	void gameLoop();
-
-	static const float WIDTH;
-	static const float HEIGHT;
 
 private:
 	

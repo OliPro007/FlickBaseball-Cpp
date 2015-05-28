@@ -11,8 +11,14 @@ public:
 	~MenuState();
 
 	virtual void init() override;
-	virtual void draw() override;
+	virtual void draw(sf::RenderTarget& window) override;
 	virtual void update() override;
+
+private:
+	sf::Texture backgroundImage;
+	sf::Texture titleImage;
+	sf::Sprite background;
+	sf::Sprite title;
 
 };
 

@@ -2,10 +2,7 @@
 
 namespace fbb {
 
-const float Game::WIDTH = 1280.0f;
-const float Game::HEIGHT = 720.0f;
-
-Game::Game() : window(sf::VideoMode((int)WIDTH, (int)HEIGHT, sf::VideoMode::getDesktopMode().bitsPerPixel), TITLE), 
+Game::Game() : window(sf::VideoMode((int)fbb::WIDTH, (int)fbb::HEIGHT, sf::VideoMode::getDesktopMode().bitsPerPixel), TITLE), 
 			   camera(sf::FloatRect(0.0f, 0.0f, WIDTH, HEIGHT)) {
 	window.setFramerateLimit(60);
 	window.setView(camera);
@@ -61,23 +58,40 @@ void Game::gameLoop() {
 		} //End system event poll
 
 		while(gsm.pollEvent(e2)) {
+			sf::Texture texture;
+			sf::Sprite sprite;
 			switch(e2.type) {
 				case fbb::Event::Close:
 					window.close();
 					break;
 				case fbb::Event::ChangeState:
+					texture.loadFromFile("loading.png");
+					sprite.setTexture(texture);
+					window.clear();
+					window.draw(sprite);
+					window.display();
+					currentButtonSet->clear();
 					gsm.setPreviousState(e2.changeState.thisState);
 					gsm.setState(e2.changeState.nextState);
 					currentButtonSet = gsm.getButtons();
 					break;
 				case fbb::Event::Return:
+					texture.loadFromFile("loading.png");
+					sprite.setTexture(texture);
+					window.clear();
+					window.draw(sprite);
+					window.display();
+					currentButtonSet->clear();
 					gsm.setState(gsm.getPreviousState());
 					currentButtonSet = gsm.getButtons();
 					break;
 			} //End switch
 		} //End game event poll
 
+		gsm.update();
+
 		window.clear(sf::Color::White);
+		gsm.draw(window);
 		for(fbb::Button& button : *currentButtonSet) {
 			window.draw(button);
 		}
