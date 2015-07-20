@@ -22,7 +22,7 @@ void GameStateManager::update() {
 	gameStates.at(currentState)->update();
 }
 
-void GameStateManager::setState(const unsigned int state) {
+void GameStateManager::setState(const BYTE state) {
 	currentState = state;
 	gameStates.at(currentState)->init();
 }
@@ -33,7 +33,7 @@ int GameStateManager::getPreviousState() {
 	return i;
 }
 
-void GameStateManager::setPreviousState(const unsigned int state) {
+void GameStateManager::setPreviousState(const BYTE state) {
 	previousStates.push(state);
 }
 

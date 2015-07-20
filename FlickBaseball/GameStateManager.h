@@ -17,14 +17,14 @@ public:
 	void update();
 
 	std::vector<fbb::Button>* getButtons() { return gameStates.at(currentState)->getButtons(); }
-	void setState(const unsigned int state);
-	void setPreviousState(const unsigned int state);
+	void setState(const BYTE state);
+	void setPreviousState(const BYTE state);
 	int getPreviousState();
 	bool pollEvent(fbb::Event& event) { return gameStates.at(currentState)->pollEvent(event); }
 
 private:
 	std::vector<fbb::IGameState*> gameStates;
-	std::stack<unsigned int> previousStates;
+	std::stack<BYTE> previousStates;
 	int currentState;
 };
 

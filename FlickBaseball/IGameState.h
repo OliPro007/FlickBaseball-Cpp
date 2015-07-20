@@ -31,11 +31,11 @@ protected:
 	std::vector<fbb::Button> buttonList;
 	std::queue<fbb::Event> eventQueue;
 
-	static const unsigned int MENU_STATE = 0;
-	static const unsigned int NORMALMODE_STATE = 1;
-	static const unsigned int FREEMODE_STATE = 2;
-	static const unsigned int OPTIONS_STATE = 3;
-	static const unsigned int HELP_STATE = 4;
+	static const BYTE MENU_STATE = 0;
+	static const BYTE NORMALMODE_STATE = 1;
+	static const BYTE FREEMODE_STATE = 2;
+	static const BYTE OPTIONS_STATE = 3;
+	static const BYTE HELP_STATE = 4;
 
 };
 
