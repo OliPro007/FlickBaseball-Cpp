@@ -23,7 +23,6 @@ private:
 	sf::RenderWindow window;
 	sf::View camera;
 	fbb::GameStateManager gsm;
-	std::vector<fbb::Button>* currentButtonSet;
 };
 
 } //End namespace

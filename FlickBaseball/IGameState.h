@@ -12,9 +12,46 @@ class IGameState {
 public:
 	virtual ~IGameState() {}
 	virtual void init() = 0;
-	virtual void draw(sf::RenderTarget& window) = 0;
+	virtual void draw(sf::RenderTarget& window) {
+		for(fbb::Button& button : buttonList) {
+			window.draw(button);
+		}
+	}
 	virtual void update() = 0;
-	std::vector<fbb::Button>* getButtons() { return &buttonList; };
+
+	virtual void mouseMoved(sf::Event::MouseMoveEvent e) {
+		for(fbb::Button& button : buttonList) {
+			if(button.isClicked())
+				break;
+
+			if(button.getBounds().contains(sf::Vector2f((float)e.x, (float)e.y))) {
+				button.setSelected();
+			} else {
+				button.setUnselected();
+			}
+		}
+	}
+	virtual void mousePressed(sf::Event::MouseButtonEvent e) {
+		for(fbb::Button& button : buttonList) {
+			if(button.getBounds().contains(sf::Vector2f((float)e.x, (float)e.y))) {
+				button.setClicked();
+				break;
+			}
+		}
+	}
+	virtual void mouseReleased(sf::Event::MouseButtonEvent e) {
+		for(fbb::Button& button : buttonList) {
+			if(button.isClicked()) {
+				button.onClick();
+			}
+			if(button.getBounds().contains(sf::Vector2f((float)e.x, (float)e.y))) {
+				button.setSelected();
+			} else {
+				button.setUnselected();
+			}
+		}
+	}
+
 	bool pollEvent(fbb::Event& event) { 
 		if(eventQueue.size() > 0) {
 			event = eventQueue.front();
@@ -31,11 +68,11 @@ protected:
 	std::vector<fbb::Button> buttonList;
 	std::queue<fbb::Event> eventQueue;
 
-	static const BYTE MENU_STATE = 0;
-	static const BYTE NORMALMODE_STATE = 1;
-	static const BYTE FREEMODE_STATE = 2;
-	static const BYTE OPTIONS_STATE = 3;
-	static const BYTE HELP_STATE = 4;
+	static const byte MENU_STATE = 0;
+	static const byte NORMALMODE_STATE = 1;
+	static const byte FREEMODE_STATE = 2;
+	static const byte OPTIONS_STATE = 3;
+	static const byte HELP_STATE = 4;
 
 };
 

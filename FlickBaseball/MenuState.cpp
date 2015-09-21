@@ -165,10 +165,23 @@ void MenuState::init() {
 void MenuState::draw(sf::RenderTarget& window) {
 	window.draw(background);
 	window.draw(title);
+	IGameState::draw(window);
 }
 
 void MenuState::update() {
 
+}
+
+void MenuState::mouseMoved(sf::Event::MouseMoveEvent e) {
+	IGameState::mouseMoved(e);
+}
+
+void MenuState::mousePressed(sf::Event::MouseButtonEvent e) {
+	IGameState::mousePressed(e);
+}
+
+void MenuState::mouseReleased(sf::Event::MouseButtonEvent e) {
+	IGameState::mouseReleased(e);
 }
 
 } //End namespace

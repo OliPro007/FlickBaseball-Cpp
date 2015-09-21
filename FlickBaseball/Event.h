@@ -6,8 +6,8 @@ namespace fbb {
 class Event {
 public:
 	struct ChangeStateEvent {
-		BYTE thisState;
-		BYTE nextState;
+		byte thisState;
+		byte nextState;
 	};
 
 	enum EventType {

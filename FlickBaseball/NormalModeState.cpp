@@ -85,11 +85,23 @@ void NormalModeState::init() {
 }
 
 void NormalModeState::draw(sf::RenderTarget& window) {
-
+	IGameState::draw(window);
 }
 
 void NormalModeState::update() {
 
+}
+
+void NormalModeState::mouseMoved(sf::Event::MouseMoveEvent e) {
+	IGameState::mouseMoved(e);
+}
+
+void NormalModeState::mousePressed(sf::Event::MouseButtonEvent e) {
+	IGameState::mousePressed(e);
+}
+
+void NormalModeState::mouseReleased(sf::Event::MouseButtonEvent e) {
+	IGameState::mouseReleased(e);
 }
 
 } //End namespace

@@ -6,8 +6,6 @@ Game::Game() : window(sf::VideoMode((int)fbb::WIDTH, (int)fbb::HEIGHT, sf::Video
 			   camera(sf::FloatRect(0.0f, 0.0f, WIDTH, HEIGHT)) {
 	window.setFramerateLimit(60);
 	window.setView(camera);
-
-	currentButtonSet = gsm.getButtons();
 }
 
 Game::~Game() {}
@@ -23,36 +21,13 @@ void Game::gameLoop() {
 					window.close();
 					break; //Close
 				case sf::Event::MouseMoved:
-					for(fbb::Button& button : *currentButtonSet) {
-						if(button.isClicked())
-							break;
-
-						if(button.getBounds().contains(sf::Vector2f((float)e1.mouseMove.x, (float)e1.mouseMove.y))) {
-							button.setSelected();
-						} else {
-							button.setUnselected();
-						}
-					}
+					gsm.mouseMoved(e1.mouseMove);
 					break; //MouseMoved
 				case sf::Event::MouseButtonPressed:
-					for(fbb::Button& button : *currentButtonSet) {
-						if(button.getBounds().contains(sf::Vector2f((float)e1.mouseButton.x, (float)e1.mouseButton.y))) {
-							button.setClicked();
-							break;
-						}
-					}
+					gsm.mousePressed(e1.mouseButton);
 					break; //MousesPressed
 				case sf::Event::MouseButtonReleased:
-					for(fbb::Button& button : *currentButtonSet) {
-						if(button.isClicked()) {
-							button.onClick();
-						}
-						if(button.getBounds().contains(sf::Vector2f((float)e1.mouseButton.x, (float)e1.mouseButton.y))) {
-							button.setSelected();
-						} else {
-							button.setUnselected();
-						}
-					}
+					gsm.mouseReleased(e1.mouseButton);
 					break; //MouseReleased
 			} //End switch
 		} //End system event poll
@@ -70,10 +45,8 @@ void Game::gameLoop() {
 					window.clear();
 					window.draw(sprite);
 					window.display();
-					currentButtonSet->clear();
 					gsm.setPreviousState(e2.changeState.thisState);
 					gsm.setState(e2.changeState.nextState);
-					currentButtonSet = gsm.getButtons();
 					break;
 				case fbb::Event::Return:
 					texture.loadFromFile("loading.png");
@@ -81,9 +54,7 @@ void Game::gameLoop() {
 					window.clear();
 					window.draw(sprite);
 					window.display();
-					currentButtonSet->clear();
 					gsm.setState(gsm.getPreviousState());
-					currentButtonSet = gsm.getButtons();
 					break;
 			} //End switch
 		} //End game event poll
@@ -92,9 +63,6 @@ void Game::gameLoop() {
 
 		window.clear(sf::Color::White);
 		gsm.draw(window);
-		for(fbb::Button& button : *currentButtonSet) {
-			window.draw(button);
-		}
 		window.display();
 	} //End game loop
 }

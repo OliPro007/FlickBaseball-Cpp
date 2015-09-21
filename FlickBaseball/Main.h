@@ -5,4 +5,4 @@ namespace fbb {
 	static const float HEIGHT = 720.0f;
 }
 
-typedef unsigned char BYTE;
+typedef unsigned char byte;
