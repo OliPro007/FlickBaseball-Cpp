@@ -82,15 +82,15 @@ void NormalModeState::update() {
 
 }
 
-void NormalModeState::mouseMoved(sf::Event::MouseMoveEvent e) {
+void NormalModeState::mouseMoved(const sf::Event::MouseMoveEvent& e) {
 	IGameState::mouseMoved(e);
 }
 
-void NormalModeState::mousePressed(sf::Event::MouseButtonEvent e) {
+void NormalModeState::mousePressed(const sf::Event::MouseButtonEvent& e) {
 	IGameState::mousePressed(e);
 }
 
-void NormalModeState::mouseReleased(sf::Event::MouseButtonEvent e) {
+void NormalModeState::mouseReleased(const sf::Event::MouseButtonEvent& e) {
 	IGameState::mouseReleased(e);
 }
 

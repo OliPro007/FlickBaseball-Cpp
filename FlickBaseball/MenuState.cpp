@@ -138,15 +138,15 @@ void MenuState::update() {
 
 }
 
-void MenuState::mouseMoved(sf::Event::MouseMoveEvent e) {
+void MenuState::mouseMoved(const sf::Event::MouseMoveEvent& e) {
 	IGameState::mouseMoved(e);
 }
 
-void MenuState::mousePressed(sf::Event::MouseButtonEvent e) {
+void MenuState::mousePressed(const sf::Event::MouseButtonEvent& e) {
 	IGameState::mousePressed(e);
 }
 
-void MenuState::mouseReleased(sf::Event::MouseButtonEvent e) {
+void MenuState::mouseReleased(const sf::Event::MouseButtonEvent& e) {
 	IGameState::mouseReleased(e);
 }
 

@@ -16,9 +16,9 @@ public:
 	void draw(sf::RenderTarget& window);
 	void update();
 
-	void mouseMoved(sf::Event::MouseMoveEvent e) { gameStates.at(currentState)->mouseMoved(e); }
-	void mousePressed(sf::Event::MouseButtonEvent e) { gameStates.at(currentState)->mousePressed(e); }
-	void mouseReleased(sf::Event::MouseButtonEvent e) { gameStates.at(currentState)->mouseReleased(e); }
+	void mouseMoved(const sf::Event::MouseMoveEvent& e) { gameStates.at(currentState)->mouseMoved(e); }
+	void mousePressed(const sf::Event::MouseButtonEvent& e) { gameStates.at(currentState)->mousePressed(e); }
+	void mouseReleased(const sf::Event::MouseButtonEvent& e) { gameStates.at(currentState)->mouseReleased(e); }
 
 	void setState(const byte state);
 	void setPreviousState(const byte state);

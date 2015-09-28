@@ -19,7 +19,7 @@ public:
 	}
 	virtual void update() = 0;
 
-	virtual void mouseMoved(sf::Event::MouseMoveEvent e) {
+	virtual void mouseMoved(const sf::Event::MouseMoveEvent& e) {
 		for(fbb::Button& button : buttonList) {
 			if(button.isClicked())
 				break;
@@ -31,7 +31,7 @@ public:
 			}
 		}
 	}
-	virtual void mousePressed(sf::Event::MouseButtonEvent e) {
+	virtual void mousePressed(const sf::Event::MouseButtonEvent& e) {
 		for(fbb::Button& button : buttonList) {
 			if(button.getBounds().contains(sf::Vector2f((float)e.x, (float)e.y))) {
 				button.setClicked();
@@ -39,7 +39,7 @@ public:
 			}
 		}
 	}
-	virtual void mouseReleased(sf::Event::MouseButtonEvent e) {
+	virtual void mouseReleased(const sf::Event::MouseButtonEvent& e) {
 		for(fbb::Button& button : buttonList) {
 			if(button.isClicked()) {
 				button.onClick();
