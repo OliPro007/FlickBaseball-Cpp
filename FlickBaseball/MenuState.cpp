@@ -21,41 +21,23 @@ void MenuState::init() {
 
 	font.loadFromFile("opensansc.ttf");
 
-	sf::Texture textureUnselected;
-	textureUnselected.loadFromFile("button_unselected.png");
-
-	sf::Texture textureSelected;
-	textureSelected.loadFromFile("button_selected.png");
-
-	sf::Texture textureClicked;
-	textureClicked.loadFromFile("button_clicked.png");
-
 	int nbButtons = 5;
 	float spacing = 75.0f;
-	float textureX = 0.0f + textureUnselected.getSize().x;
-	float textureY = 0.0f + textureUnselected.getSize().y;
-	float x = 1280.0f - spacing - textureX;
-	float y = (720.0f - (spacing * (nbButtons - 1) + textureY * nbButtons)) / 2;
-	sf::VertexArray quad(sf::Quads, 4);
-	sf::Text text;
-	text.setFont(font);
-	text.setCharacterSize(25);
-	text.setColor(sf::Color::Black);
+	float buttonWidth = 400.0f;
+	float buttonHeight = 50.0f;
+	float x = 1280.0f - spacing - buttonWidth;
+	float y = (720.0f - (spacing * (nbButtons - 1) + buttonHeight * nbButtons)) / 2;
 	sf::FloatRect textRect;
 
-	quad[0].position = sf::Vector2f(x, y);
-	quad[1].position = sf::Vector2f(x + textureX, y);
-	quad[2].position = sf::Vector2f(x + textureX, y + textureY);
-	quad[3].position = sf::Vector2f(x, y + textureY);
-	quad[0].texCoords = sf::Vector2f(0.0f, 0.0f);
-	quad[1].texCoords = sf::Vector2f(textureX, 0.0f);
-	quad[2].texCoords = sf::Vector2f(textureX, textureY);
-	quad[3].texCoords = sf::Vector2f(0.0f, textureY);
-	text.setString("Normal Mode");
-	textRect = text.getLocalBounds();
-	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	text.setPosition(x + textureX / 2, y + textureY / 2);
-	fbb::Button btnNormalMode(text, quad, textureUnselected, textureSelected, textureClicked);
+	fbb::RoundRectangle normalModeShape(sf::Vector2f(buttonWidth, buttonHeight), 10.0f, 10);
+	normalModeShape.setFillColor(sf::Color(182, 59, 0, 255));
+	normalModeShape.setPosition(x, y);
+	sf::Text normalModeText("Normal Mode", font, 25);
+	normalModeText.setColor(sf::Color::Black);
+	textRect = normalModeText.getLocalBounds();
+	normalModeText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+	normalModeText.setPosition(x + buttonWidth / 2, y + buttonHeight / 2);
+	fbb::Button btnNormalMode(normalModeShape, normalModeText);
 	btnNormalMode.setAction([this]() {
 		std::cout << "Switching to Normal Mode..." << std::endl;
 		fbb::Event e;
@@ -65,20 +47,16 @@ void MenuState::init() {
 		pushEvent(e);
 	});
 
-	y += textureY + spacing;
-	quad[0].position = sf::Vector2f(x, y);
-	quad[1].position = sf::Vector2f(x + textureX, y);
-	quad[2].position = sf::Vector2f(x + textureX, y + textureY);
-	quad[3].position = sf::Vector2f(x, y + textureY);
-	quad[0].texCoords = sf::Vector2f(0.0f, 0.0f);
-	quad[1].texCoords = sf::Vector2f(textureX, 0.0f);
-	quad[2].texCoords = sf::Vector2f(textureX, textureY);
-	quad[3].texCoords = sf::Vector2f(0.0f, textureY);
-	text.setString("Free Mode");
-	textRect = text.getLocalBounds();
-	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	text.setPosition(x + textureX / 2, y + textureY / 2);
-	fbb::Button btnFreeMode(text, quad, textureUnselected, textureSelected, textureClicked);
+	y += buttonHeight + spacing;
+	fbb::RoundRectangle freeModeShape(sf::Vector2f(buttonWidth, buttonHeight), 10.0f, 10);
+	freeModeShape.setFillColor(sf::Color(182, 59, 0, 255));
+	freeModeShape.setPosition(x, y);
+	sf::Text freeModeText("Free Mode", font, 25);
+	freeModeText.setColor(sf::Color::Black);
+	textRect = freeModeText.getLocalBounds();
+	freeModeText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+	freeModeText.setPosition(x + buttonWidth / 2, y + buttonHeight / 2);
+	fbb::Button btnFreeMode(freeModeShape, freeModeText);
 	btnFreeMode.setAction([this]() {
 		std::cout << "Switching to Free Mode..." << std::endl;
 		fbb::Event e;
@@ -87,20 +65,16 @@ void MenuState::init() {
 		e.changeState.nextState = FREEMODE_STATE;
 	});
 
-	y += textureY + spacing;
-	quad[0].position = sf::Vector2f(x, y);
-	quad[1].position = sf::Vector2f(x + textureX, y);
-	quad[2].position = sf::Vector2f(x + textureX, y + textureY);
-	quad[3].position = sf::Vector2f(x, y + textureY);
-	quad[0].texCoords = sf::Vector2f(0.0f, 0.0f);
-	quad[1].texCoords = sf::Vector2f(textureX, 0.0f);
-	quad[2].texCoords = sf::Vector2f(textureX, textureY);
-	quad[3].texCoords = sf::Vector2f(0.0f, textureY);
-	text.setString("Options");
-	textRect = text.getLocalBounds();
-	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	text.setPosition(x + textureX / 2, y + textureY / 2);
-	fbb::Button btnOptions(text, quad, textureUnselected, textureSelected, textureClicked);
+	y += buttonHeight + spacing;
+	fbb::RoundRectangle optionsShape(sf::Vector2f(buttonWidth, buttonHeight), 10.0f, 10);
+	optionsShape.setFillColor(sf::Color(182, 59, 0, 255));
+	optionsShape.setPosition(x, y);
+	sf::Text optionsText("Options", font, 25);
+	optionsText.setColor(sf::Color::Black);
+	textRect = optionsText.getLocalBounds();
+	optionsText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+	optionsText.setPosition(x + buttonWidth / 2, y + buttonHeight / 2);
+	fbb::Button btnOptions(optionsShape, optionsText);
 	btnOptions.setAction([this]() {
 		std::cout << "Switching to Options menu..." << std::endl;
 		fbb::Event e;
@@ -109,20 +83,16 @@ void MenuState::init() {
 		e.changeState.nextState = OPTIONS_STATE;
 	});
 
-	y += textureY + spacing;
-	quad[0].position = sf::Vector2f(x, y);
-	quad[1].position = sf::Vector2f(x + textureX, y);
-	quad[2].position = sf::Vector2f(x + textureX, y + textureY);
-	quad[3].position = sf::Vector2f(x, y + textureY);
-	quad[0].texCoords = sf::Vector2f(0.0f, 0.0f);
-	quad[1].texCoords = sf::Vector2f(textureX, 0.0f);
-	quad[2].texCoords = sf::Vector2f(textureX, textureY);
-	quad[3].texCoords = sf::Vector2f(0.0f, textureY);
-	text.setString("Help");
-	textRect = text.getLocalBounds();
-	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	text.setPosition(x + textureX / 2, y + textureY / 2);
-	fbb::Button btnHelp(text, quad, textureUnselected, textureSelected, textureClicked);
+	y += buttonHeight + spacing;
+	fbb::RoundRectangle helpShape(sf::Vector2f(buttonWidth, buttonHeight), 10.0f, 10);
+	helpShape.setFillColor(sf::Color(182, 59, 0, 255));
+	helpShape.setPosition(x, y);
+	sf::Text helpText("Help", font, 25);
+	helpText.setColor(sf::Color::Black);
+	textRect = helpText.getLocalBounds();
+	helpText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+	helpText.setPosition(x + buttonWidth / 2, y + buttonHeight / 2);
+	fbb::Button btnHelp(helpShape, helpText);
 	btnHelp.setAction([this]() {
 		std::cout << "Switching to Help menu..." << std::endl;
 		fbb::Event e;
@@ -131,20 +101,16 @@ void MenuState::init() {
 		e.changeState.nextState = HELP_STATE;
 	});
 
-	y = y + textureY + spacing;
-	quad[0].position = sf::Vector2f(x, y);
-	quad[1].position = sf::Vector2f(x + textureX, y);
-	quad[2].position = sf::Vector2f(x + textureX, y + textureY);
-	quad[3].position = sf::Vector2f(x, y + textureY);
-	quad[0].texCoords = sf::Vector2f(0.0f, 0.0f);
-	quad[1].texCoords = sf::Vector2f(textureX, 0.0f);
-	quad[2].texCoords = sf::Vector2f(textureX, textureY);
-	quad[3].texCoords = sf::Vector2f(0.0f, textureY);
-	text.setString("Quit game");
-	textRect = text.getLocalBounds();
-	text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-	text.setPosition(x + textureX / 2, y + textureY / 2);
-	fbb::Button btnQuit(text, quad, textureUnselected, textureSelected, textureClicked);
+	y = y + buttonHeight + spacing;
+	fbb::RoundRectangle quitShape(sf::Vector2f(buttonWidth, buttonHeight), 10.0f, 10);
+	quitShape.setFillColor(sf::Color(182, 59, 0, 255));
+	quitShape.setPosition(x, y);
+	sf::Text quitText("Quit Game", font, 25);
+	quitText.setColor(sf::Color::Black);
+	textRect = quitText.getLocalBounds();
+	quitText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+	quitText.setPosition(x + buttonWidth / 2, y + buttonHeight / 2);
+	fbb::Button btnQuit(quitShape, quitText);
 	btnQuit.setAction([this]() {
 		std::cout << "Closing game..." << std::endl;
 		fbb::Event e;
