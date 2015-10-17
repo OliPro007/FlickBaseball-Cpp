@@ -3,22 +3,14 @@
 namespace fbb {
 
 MenuState::MenuState() {
-	backgroundImage.loadFromFile("mainmenu.png");
-	titleImage.loadFromFile("title.png");
-	background.setTexture(backgroundImage);
-	title.setTexture(titleImage);
-	std::cout << "Created Menu state!" << std::endl;
-}
-
-MenuState::~MenuState() {
-	fbb::IGameState::~IGameState();
-}
-
-void MenuState::init() {
 	sf::Clock* clock = new sf::Clock();
 	sf::Time beginTime = clock->getElapsedTime();
 	std::cout << "Initializing Menu state..." << std::endl;
 
+	backgroundImage.loadFromFile("mainmenu.png");
+	titleImage.loadFromFile("title.png");
+	background.setTexture(backgroundImage);
+	title.setTexture(titleImage);
 	font.loadFromFile("opensansc.ttf");
 
 	int nbButtons = 5;
@@ -126,7 +118,10 @@ void MenuState::init() {
 
 	std::cout << "Done initializing Menu state! Time: " << (clock->getElapsedTime() - beginTime).asMilliseconds() << " milliseconds" << std::endl;
 	delete clock;
+	clock = nullptr;
 }
+
+MenuState::~MenuState() {}
 
 void MenuState::draw(sf::RenderTarget& window) {
 	window.draw(background);

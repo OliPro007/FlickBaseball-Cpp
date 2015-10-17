@@ -2,10 +2,8 @@
 
 namespace fbb {
 
-Game::Game() : window(sf::VideoMode((int)fbb::WIDTH, (int)fbb::HEIGHT, sf::VideoMode::getDesktopMode().bitsPerPixel), TITLE), 
-			   camera(sf::FloatRect(0.0f, 0.0f, WIDTH, HEIGHT)) {
+Game::Game() : window(sf::VideoMode((int)fbb::WIDTH, (int)fbb::HEIGHT, sf::VideoMode::getDesktopMode().bitsPerPixel), TITLE) {
 	window.setFramerateLimit(60);
-	window.setView(camera);
 }
 
 Game::~Game() {}
@@ -19,16 +17,16 @@ void Game::gameLoop() {
 			switch(e1.type) {
 				case sf::Event::Closed:
 					window.close();
-					break; //Close
+					break;
 				case sf::Event::MouseMoved:
 					gsm.mouseMoved(e1.mouseMove);
-					break; //MouseMoved
+					break;
 				case sf::Event::MouseButtonPressed:
 					gsm.mousePressed(e1.mouseButton);
-					break; //MousesPressed
+					break;
 				case sf::Event::MouseButtonReleased:
 					gsm.mouseReleased(e1.mouseButton);
-					break; //MouseReleased
+					break;
 			} //End switch
 		} //End system event poll
 

@@ -4,36 +4,44 @@ namespace fbb {
 
 GameStateManager::GameStateManager() {
 	std::cout << "Initializing game state manager..." << std::endl;
-	gameStates.push_back(new MenuState());
-	gameStates.push_back(new NormalModeState);
-	gameStates.shrink_to_fit();
-
-	setState(0);
+	registerGameState(IGameState::MENU_STATE, []()->IGameState* { return new MenuState(); });
+	registerGameState(IGameState::NORMALMODE_STATE, []()->IGameState* { return new NormalModeState; });
+	setState(IGameState::MENU_STATE);
 	std::cout << "Done initializing game state manager!" << std::endl;
 }
 
-GameStateManager::~GameStateManager() {}
+GameStateManager::~GameStateManager() {
+	delete gameState;
+	gameState = nullptr;
+	registry.clear();
+}
+
+void GameStateManager::registerGameState(byte id, std::function<IGameState*(void)> constructor) {
+	registry[id] = constructor;
+}
 
 void GameStateManager::draw(sf::RenderTarget& window) {
-	gameStates.at(currentState)->draw(window);
+	gameState->draw(window);
 }
 
 void GameStateManager::update() {
-	gameStates.at(currentState)->update();
+	gameState->update();
 }
 
-void GameStateManager::setState(const byte state) {
+void GameStateManager::setState(byte state) {
 	currentState = state;
-	gameStates.at(currentState)->init();
+	delete gameState;
+	gameState = nullptr;
+	gameState = registry[state]();
 }
 
-int GameStateManager::getPreviousState() {
+byte GameStateManager::getPreviousState() {
 	int i = previousStates.top();
 	previousStates.pop();
 	return i;
 }
 
-void GameStateManager::setPreviousState(const byte state) {
+void GameStateManager::setPreviousState(byte state) {
 	previousStates.push(state);
 }
 

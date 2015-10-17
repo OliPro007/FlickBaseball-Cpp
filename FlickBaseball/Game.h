@@ -16,12 +16,10 @@ public:
 	~Game();
 	void gameLoop();
 
-private:
-	
+private:	
 	const sf::String TITLE = "Flick Baseball";
 
 	sf::RenderWindow window;
-	sf::View camera;
 	fbb::GameStateManager gsm;
 };
 

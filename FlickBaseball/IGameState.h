@@ -10,8 +10,7 @@ namespace fbb {
 
 class IGameState {
 public:
-	virtual ~IGameState() {}
-	virtual void init() = 0;
+	virtual ~IGameState() { buttonList.clear(); }
 	virtual void draw(sf::RenderTarget& window) {
 		for(fbb::Button& button : buttonList) {
 			window.draw(button);
@@ -63,16 +62,16 @@ public:
 	}
 	void pushEvent(fbb::Event& event) { eventQueue.push(event); }
 
-protected:
-	sf::Font font;
-	std::vector<fbb::Button> buttonList;
-	std::queue<fbb::Event> eventQueue;
-
 	static const byte MENU_STATE = 0;
 	static const byte NORMALMODE_STATE = 1;
 	static const byte FREEMODE_STATE = 2;
 	static const byte OPTIONS_STATE = 3;
 	static const byte HELP_STATE = 4;
+
+protected:
+	sf::Font font;
+	std::vector<fbb::Button> buttonList;
+	std::queue<fbb::Event> eventQueue;
 
 };
 

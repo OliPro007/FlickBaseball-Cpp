@@ -11,7 +11,7 @@ int main() {
 	std::cout << "Game instance created successfully! Time: " << (clock->getElapsedTime() - beginTime).asMilliseconds() << " milliseconds" << std::endl;
 
 	delete clock;
-	clock = NULL;
+	clock = nullptr;
 	game.gameLoop();
 
 	return 0;

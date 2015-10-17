@@ -3,36 +3,20 @@
 namespace fbb {
 
 NormalModeState::NormalModeState() {
-	std::cout << "Created Normal Mode state!" << std::endl;
-}
-
-NormalModeState::~NormalModeState() {
-	fbb::IGameState::~IGameState();
-}
-
-void NormalModeState::init() {
 	sf::Clock* clock = new sf::Clock();
 	sf::Time beginTime = clock->getElapsedTime();
 	std::cout << "Initializing Normal Mode state..." << std::endl;
 
+	backgroundImage.loadFromFile("background_field.png");
+	backgroundImage.setRepeated(true);
+	background.setTexture(backgroundImage);
+	background.setTextureRect(sf::IntRect(0, 0, backgroundImage.getSize().x * 100, backgroundImage.getSize().y));
+	background.scale(fbb::WIDTH / backgroundImage.getSize().x, fbb::HEIGHT / backgroundImage.getSize().y);
 	font.loadFromFile("opensansc.ttf");
-
-	sf::Texture textureUnselected;
-	textureUnselected.loadFromFile("button_unselected.png");
-
-	sf::Texture textureSelected;
-	textureSelected.loadFromFile("button_selected.png");
-
-	sf::Texture textureClicked;
-	textureClicked.loadFromFile("button_clicked.png");
 
 	float pos = 100.0f;
 	float buttonWidth = 400.0f;
 	float buttonHeight = 50.0f;
-	sf::Text text;
-	text.setFont(font);
-	text.setCharacterSize(25);
-	text.setColor(sf::Color::Black);
 	sf::FloatRect textRect;
 
 	fbb::RoundRectangle returnShape(sf::Vector2f(buttonWidth, buttonHeight), 10.0f, 10);
@@ -72,9 +56,13 @@ void NormalModeState::init() {
 
 	std::cout << "Done initializing Normal Mode state! Time: " << (clock->getElapsedTime() - beginTime).asMilliseconds() << " milliseconds" << std::endl;
 	delete clock;
+	clock = nullptr;
 }
 
+NormalModeState::~NormalModeState() {}
+
 void NormalModeState::draw(sf::RenderTarget& window) {
+	window.draw(background);
 	IGameState::draw(window);
 }
 

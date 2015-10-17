@@ -10,7 +10,6 @@ public:
 	MenuState();
 	~MenuState();
 
-	virtual void init() override;
 	virtual void draw(sf::RenderTarget& window) override;
 	virtual void update() override;
 
