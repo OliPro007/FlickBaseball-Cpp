@@ -2,10 +2,11 @@
 
 namespace fbb {
 
-GameStateManager::GameStateManager() {
+GameStateManager::GameStateManager(fbb::Config config) :
+config(config) {
 	std::cout << "Initializing game state manager..." << std::endl;
-	registerGameState(IGameState::MENU_STATE, []()->IGameState* { return new MenuState(); });
-	registerGameState(IGameState::NORMALMODE_STATE, []()->IGameState* { return new NormalModeState; });
+	registerGameState(IGameState::MENU_STATE, [this]()->IGameState* { return new MenuState(this->config); });
+	registerGameState(IGameState::NORMALMODE_STATE, [this]()->IGameState* { return new NormalModeState(this->config); });
 	setState(IGameState::MENU_STATE);
 	std::cout << "Done initializing game state manager!" << std::endl;
 }
@@ -29,10 +30,15 @@ void GameStateManager::update() {
 }
 
 void GameStateManager::setState(byte state) {
-	currentState = state;
-	delete gameState;
-	gameState = nullptr;
-	gameState = registry[state]();
+	try {
+		currentState = state;
+		delete gameState;
+		gameState = nullptr;
+		gameState = registry[state]();
+	} catch(std::exception e) {
+		std::cerr << "setState failed (see previous exception). Reloading previous state...";
+		setState(getPreviousState());
+	}
 }
 
 byte GameStateManager::getPreviousState() {

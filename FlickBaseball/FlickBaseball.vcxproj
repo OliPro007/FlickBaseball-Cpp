@@ -44,7 +44,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)SFML-2.3.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)RapidXML\;$(SolutionDir)SFML-2.3.2\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -99,6 +99,14 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="opensansc.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="en.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="fr.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

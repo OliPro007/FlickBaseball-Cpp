@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stringtable>
+  <state id="0">
+    <string id="normalMode">Normal Mode</string>
+    <string id="freeMode">Free Mode</string>
+    <string id="options">Options</string>
+    <string id="help">Help</string>
+    <string id="quit">Quit Game</string>
+  </state>
+  <state id="1">
+    <string id="throw">Throw</string>
+  </state>
+</stringtable>

@@ -12,7 +12,7 @@ namespace fbb {
 
 class Game {
 public:
-	Game();
+	Game(fbb::Config config);
 	~Game();
 	void gameLoop();
 

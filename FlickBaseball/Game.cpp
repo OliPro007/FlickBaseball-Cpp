@@ -2,7 +2,15 @@
 
 namespace fbb {
 
-Game::Game() : window(sf::VideoMode((int)fbb::WIDTH, (int)fbb::HEIGHT, sf::VideoMode::getDesktopMode().bitsPerPixel), TITLE) {
+Game::Game(fbb::Config config) :
+gsm(config),
+window(sf::VideoMode((int)fbb::WIDTH, (int)fbb::HEIGHT, sf::VideoMode::getDesktopMode().bitsPerPixel), TITLE) {
+	std::cout << "*** OpenGL Context Settings" << std::endl;
+	std::cout << "*** OpenGL version: " << window.getSettings().majorVersion << "." << window.getSettings().minorVersion << std::endl;
+	std::cout << "*** Depth bits: " << window.getSettings().depthBits << std::endl;
+	std::cout << "*** Stencil bits: " << window.getSettings().stencilBits << std::endl;
+	std::cout << "*** Antialiasing level: " << window.getSettings().antialiasingLevel << std::endl;
+	std::cout << "*** Attribute flags: " << window.getSettings().attributeFlags << std::endl;
 	window.setFramerateLimit(60);
 }
 

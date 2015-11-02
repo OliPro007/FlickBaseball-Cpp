@@ -12,7 +12,7 @@ namespace fbb {
 
 class GameStateManager {
 public:
-	GameStateManager();
+	GameStateManager(fbb::Config config);
 	~GameStateManager();
 
 	void registerGameState(byte id, std::function<IGameState*(void)> constructor);
@@ -34,6 +34,7 @@ private:
 	std::map<byte, std::function<IGameState*(void)>> registry;
 	std::stack<byte> previousStates;
 	byte currentState;
+	fbb::Config config;
 };
 
 } //End namespace

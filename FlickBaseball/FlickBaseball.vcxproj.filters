@@ -85,4 +85,12 @@
       <Filter>Fichiers de ressources</Filter>
     </Font>
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="fr.xml">
+      <Filter>Fichiers de ressources</Filter>
+    </Xml>
+    <Xml Include="en.xml">
+      <Filter>Fichiers de ressources</Filter>
+    </Xml>
+  </ItemGroup>
 </Project>

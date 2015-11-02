@@ -7,8 +7,9 @@ namespace fbb {
 
 class NormalModeState : public fbb::IGameState {
 public:
-	NormalModeState();
-	~NormalModeState();
+	NormalModeState(fbb::Config);
+	virtual ~NormalModeState();
+	virtual void loadStringtable(std::string locale) override;
 
 	virtual void draw(sf::RenderTarget& window) override;
 	virtual void update() override;

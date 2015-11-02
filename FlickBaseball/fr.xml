@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<stringtable>
+  <state id="0">
+    <string id="normalMode">Mode Normal</string>
+    <string id="freeMode">Mode Libre</string>
+    <string id="options">Options</string>
+    <string id="help">Aide</string>
+    <string id="quit">Quitter le jeu</string>
+  </state>
+  <state id="1">
+    <string id="throw">Lancer</string>
+  </state>
+</stringtable>

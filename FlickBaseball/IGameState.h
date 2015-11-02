@@ -1,16 +1,21 @@
 #pragma once
 #include <vector>
 #include <queue>
+#include <map>
 #include <iostream>
+#include <fstream>
 #include "Main.h"
 #include "Button.h"
 #include "Event.h"
+#include "rapidxml.hpp"
 
 namespace fbb {
 
 class IGameState {
 public:
 	virtual ~IGameState() { buttonList.clear(); }
+	virtual void loadStringtable(std::string locale) = 0;
+
 	virtual void draw(sf::RenderTarget& window) {
 		for(fbb::Button& button : buttonList) {
 			window.draw(button);
@@ -62,16 +67,17 @@ public:
 	}
 	void pushEvent(fbb::Event& event) { eventQueue.push(event); }
 
-	static const byte MENU_STATE = 0;
-	static const byte NORMALMODE_STATE = 1;
-	static const byte FREEMODE_STATE = 2;
-	static const byte OPTIONS_STATE = 3;
-	static const byte HELP_STATE = 4;
+	static const byte MENU_STATE			= 0x00;
+	static const byte NORMALMODE_STATE		= 0x01;
+	static const byte FREEMODE_STATE		= 0x02;
+	static const byte OPTIONS_STATE			= 0x03;
+	static const byte HELP_STATE			= 0x04;
 
 protected:
 	sf::Font font;
 	std::vector<fbb::Button> buttonList;
 	std::queue<fbb::Event> eventQueue;
+	std::map<std::string, sf::String> stringTable;
 
 };
 

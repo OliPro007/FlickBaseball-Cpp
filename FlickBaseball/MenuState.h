@@ -7,8 +7,9 @@ namespace fbb {
 
 class MenuState : public fbb::IGameState {
 public:
-	MenuState();
-	~MenuState();
+	MenuState(fbb::Config config);
+	virtual ~MenuState();
+	virtual void loadStringtable(std::string locale) override;
 
 	virtual void draw(sf::RenderTarget& window) override;
 	virtual void update() override;
