@@ -2,7 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <functional>
-#include "SFML\Graphics.hpp"
+#include "SFML/Graphics.hpp"
 #include "Main.h"
 #include "Button.h"
 #include "GameStateManager.h"

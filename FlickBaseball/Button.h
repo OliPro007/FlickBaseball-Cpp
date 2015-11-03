@@ -2,7 +2,7 @@
 #include <iostream>
 #include <functional>
 #include <memory>
-#include "SFML\Graphics.hpp"
+#include "SFML/Graphics.hpp"
 #include "RoundRectangle.h"
 
 namespace fbb {
