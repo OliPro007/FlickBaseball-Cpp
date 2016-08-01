@@ -1,5 +1,4 @@
 #pragma once
-#include <functional>
 #include "IGameState.h"
 #include "Button.h"
 
@@ -9,7 +8,6 @@ class NormalModeState : public fbb::IGameState {
 public:
 	NormalModeState(fbb::Config);
 	virtual ~NormalModeState();
-	virtual void loadStringtable(std::string locale) override;
 
 	virtual void draw(sf::RenderTarget& window) override;
 	virtual void update() override;

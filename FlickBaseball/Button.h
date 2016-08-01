@@ -9,11 +9,13 @@ namespace fbb {
 
 class Button : public sf::Drawable, public sf::Transformable {
 public:
+	typedef std::function<void()> Action;
+
 	Button(std::shared_ptr<sf::Shape> shape = std::make_shared<sf::RectangleShape>(), const sf::Text& text = sf::Text());
 	Button(const Button& other);
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	void setAction(const std::function<void()>& action) { this->action = action; }
+	void setAction(Action&& action) { this->action = std::move(action); }
 	void onClick() const;
 
 	void setText(const sf::Text& text) { this->text = text; }
@@ -29,7 +31,7 @@ public:
 private:
 	std::shared_ptr<sf::Shape> shape;
 	sf::Text text;
-	std::function<void()> action;
+	Action action;
 	bool selected = false;
 	bool clicked = false;
 };

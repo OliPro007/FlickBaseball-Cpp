@@ -14,13 +14,43 @@ namespace fbb {
 class IGameState {
 public:
 	virtual ~IGameState() { buttonList.clear(); }
-	virtual void loadStringtable(std::string locale) = 0;
+
+	void loadStringtable(std::string locale, char state) {
+		using namespace rapidxml;
+
+		std::ifstream file;
+		file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		try {
+			file.open(locale + ".xml");
+			xml_document<> doc;
+			xml_node<>* root;
+			std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+			buffer.push_back('\0');
+			doc.parse<0>(&buffer[0]);
+			root = doc.first_node("stringtable");
+
+			for(xml_node<>* stateNode = root->first_node("state"); stateNode; stateNode = stateNode->next_sibling()) {
+				if(*(stateNode->first_attribute("id")->value()) == state) {
+					for(xml_node<>* string = stateNode->first_node("string"); string; string = string->next_sibling()) {
+						//Use a map to tie the id with the value;
+						std::pair<std::string, std::string> pair(string->first_attribute("id")->value(), string->value());
+						stringTable.emplace(pair);
+					}
+				}
+			}
+			file.close();
+		} catch(std::exception e) {
+			std::cerr << e.what() << std::endl;
+			throw;
+		}
+	}
 
 	virtual void draw(sf::RenderTarget& window) {
 		for(fbb::Button& button : buttonList) {
 			window.draw(button);
 		}
 	}
+
 	virtual void update() = 0;
 
 	virtual void mouseMoved(const sf::Event::MouseMoveEvent& e) {
@@ -35,6 +65,7 @@ public:
 			}
 		}
 	}
+
 	virtual void mousePressed(const sf::Event::MouseButtonEvent& e) {
 		for(fbb::Button& button : buttonList) {
 			if(button.getBounds().contains(sf::Vector2f((float)e.x, (float)e.y))) {
@@ -43,6 +74,7 @@ public:
 			}
 		}
 	}
+
 	virtual void mouseReleased(const sf::Event::MouseButtonEvent& e) {
 		for(fbb::Button& button : buttonList) {
 			if(button.isClicked()) {
@@ -65,6 +97,7 @@ public:
 			return false;
 		}
 	}
+
 	void pushEvent(fbb::Event& event) { eventQueue.push(event); }
 
 	static const byte MENU_STATE			= 0x00;

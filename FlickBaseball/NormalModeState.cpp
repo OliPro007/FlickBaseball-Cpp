@@ -1,7 +1,5 @@
 #include "NormalModeState.h"
 
-using namespace rapidxml;
-
 namespace fbb {
 
 NormalModeState::NormalModeState(fbb::Config config) {
@@ -17,7 +15,7 @@ NormalModeState::NormalModeState(fbb::Config config) {
 	font.loadFromFile("opensansc.ttf");
 
 	try {
-		loadStringtable(config.locale);
+		loadStringtable(config.locale, '0' + NORMALMODE_STATE);
 	} catch(std::exception e) {
 		std::cerr << "Normal mode state failed to load (see previous exception)" << std::endl;
 		throw;
@@ -81,34 +79,6 @@ NormalModeState::NormalModeState(fbb::Config config) {
 }
 
 NormalModeState::~NormalModeState() {}
-
-void NormalModeState::loadStringtable(std::string locale) {
-	std::ifstream file;
-	file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-	try {
-		file.open(locale + ".xml");
-		xml_document<> doc;
-		xml_node<>* root;
-		std::vector<char> buffer((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-		buffer.push_back('\0');
-		doc.parse<0>(&buffer[0]);
-		root = doc.first_node("stringtable");
-
-		for(xml_node<>* state = root->first_node("state"); state; state = state->next_sibling()) {
-			if(*(state->first_attribute("id")->value()) == '1') {
-				for(xml_node<>* string = state->first_node("string"); string; string = string->next_sibling()) {
-					//Use a map to tie the id with the value;
-					std::pair<std::string, std::string> pair(string->first_attribute("id")->value(), string->value());
-					stringTable.emplace(pair);
-				}
-			}
-		}
-		file.close();
-	} catch(std::exception e) {
-		std::cerr << e.what() << std::endl;
-		throw;
-	}
-}
 
 void NormalModeState::draw(sf::RenderTarget& window) {
 	window.draw(background);
